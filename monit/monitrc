@@ -1,0 +1,11 @@
+## Monit settings
+set daemon 300
+set logfile syslog facility log_daemon
+set mailserver localhost
+set alert root@localhost
+set httpd port 8011 and
+     allow user:passwd
+     use address localhost
+
+include /etc/monit/conf.d/*.monit
+

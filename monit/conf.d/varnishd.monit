@@ -1,0 +1,10 @@
+## Monitoring varnishd Service
+check process varnishd with pidfile /var/run/varnishd.pid
+group www-frontend
+start program = "/etc/init.d/varnish start"
+stop program = "/etc/init.d/varnish stop"
+if loadavg(5min) greater than 10 for 8 cycles then stop
+if failed host 127.0.0.1 port 8080 protocol http
+  and request "/monit-url-check-zk3d0ll23"
+  then restart
+if 3 restarts within 5 cycles then timeout

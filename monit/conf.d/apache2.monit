@@ -1,0 +1,7 @@
+## Monitoring Apache2 Service
+check process apache2 with pidfile /var/run/apache2.pid
+start program = "/etc/init.d/apache2 start"
+stop program = "/etc/init.d/apache2 stop"
+if loadavg(5min) greater than 10 for 8 cycles then stop
+if 3 restarts within 5 cycles then timeout
+group server

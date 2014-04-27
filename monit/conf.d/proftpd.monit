@@ -1,0 +1,7 @@
+check process proftpd with pidfile /var/run/proftpd.pid
+group ftp
+alert root@localhost but not on { pid }
+start program = "/etc/init.d/proftpd start && sleep 10"
+stop program  = "/etc/init.d/proftpd force-stop && sleep 10"
+if failed host example.org port 21 protocol ftp then restart
+if 5 restarts within 5 cycles then timeout

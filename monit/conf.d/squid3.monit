@@ -1,0 +1,7 @@
+check process squid3 with pidfile /var/run/squid3.pid
+group proxy
+alert root@localhost but not on { pid }
+start program = "/etc/init.d/squid3 start"
+stop  program = "/etc/init.d/squid3 stop"
+if failed host example.org port 3128 then restart
+if 5 restarts within 5 cycles then timeout

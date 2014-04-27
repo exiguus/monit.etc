@@ -1,0 +1,10 @@
+## Monitoring thttpd Service
+check process thttpd with pidfile /var/run/thttpd.pid
+group www-backend
+alert root@localhost but not on { pid }
+start program = "/etc/init.d/thttpd start"
+stop program = "/etc/init.d/thttpd stop"
+if loadavg(5min) greater than 8 for 6 cycles then stop
+if failed host 127.0.0.1 port 8010 then restart
+if 3 restarts within 5 cycles then timeout
+group server
